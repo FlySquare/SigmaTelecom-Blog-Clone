@@ -1,1 +1,22 @@
 /* You can add global styles to this file, and also import other style files */
+$primary-color: #081c48;
+$hover-color: #c9c417;
+
+* {
+  font-family: 'Questrial', sans-serif;
+}
+
+html,body{
+  padding: 20px;
+  background: $primary-color;
+  color: white;
+}
+
+a{
+  color: white;
+  text-decoration: none;
+}
+
+a:hover{
+  color: $hover-color;
+}
