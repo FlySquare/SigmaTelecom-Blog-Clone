@@ -6,5 +6,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
+  overflow = false;
 
+  giveOverflow(){
+    this.overflow = !this.overflow;
+    if (this.overflow) {
+      document.body.style.overflow = "hidden";
+    }else{
+      document.body.style.overflow = "auto";
+    }
+  }
 }

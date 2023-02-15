@@ -23,11 +23,17 @@ export class Api{
     private static parsePost(body: string): any {
         const $ = cheerio.load(body);
         const post: Post = new Post();
+        if($('[data-hook="empty-states__title"]').length > 0) {
+            return {
+                error: true,
+                message: 'Post not found!'
+            }
+        }
         post.sharedAt = $('[data-hook="time-ago"]').attr().title;
         post.timeToRead = $('[data-hook="time-to-read"]').attr().title;
         post.title = $('[data-hook="post-title"]').children(0).children(0).children(0).text();
         post.description = $('[data-hook="post-description"]').children(0).children(0).html();
-        return post.prepare(post);
+        return {data:post.prepare(post)};
     }
 
     private static parsePosts(body: string): any {
@@ -63,7 +69,7 @@ export class Api{
         $('[data-hook="like-button-with-count__like-count"]').each(function(key: any,value: any) {
             posts[key].likeCount = value.children[0].children[0].data;
         });
-        return posts.map((post: Post) => post.prepare(post));
+        return {data: posts.map((post: Post) => post.prepare(post))};
     }
 
 }

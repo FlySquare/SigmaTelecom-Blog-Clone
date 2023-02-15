@@ -1,1 +1,6 @@
-<p>home works!</p>
+<div *ngIf="posts.length === 0" class="loader">
+  <img src="assets/images/loading-gif.gif" alt="loader">
+</div>
+<div class="content">
+  <app-post-detail [routerLink]="'/post/'+post.slug" *ngFor="let post of posts" [post]="post"></app-post-detail>
+</div>

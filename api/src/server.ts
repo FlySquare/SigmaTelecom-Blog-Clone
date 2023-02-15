@@ -3,19 +3,22 @@ import * as dotenv from 'dotenv'
 dotenv.config();
 import {Api} from "./Services/api";
 import { Request, Response } from 'express';
-import request from "request";
 const app = express();
+const cors = require('cors');
 
+app.use(cors({
+    origin: '*'
+}));
 
 app.get('/', (req: Request, res: Response) => {
-    res.redirect('/posts/page/1');
+    res.redirect('/api/posts/page/1');
 });
 
-app.get('/posts/page/:id', (req: Request, res: Response) => {
+app.get('/api/posts/page/:id', (req: Request, res: Response) => {
     Api.getPosts(req, res);
 });
 
-app.get('/post/:shortCode', (req: Request, res: Response) => {
+app.get('/api/post/:shortCode', (req: Request, res: Response) => {
     Api.getPost(req, res);
 });
 app.get('*', (req: Request, res: Response) => {

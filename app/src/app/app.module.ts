@@ -6,21 +6,29 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/layouts/header/header.component';
 import { FooterComponent } from './components/layouts/footer/footer.component';
 import { HomeComponent } from './pages/home/home.component';
-import { PostComponent } from './pages/post/post.component';
+import {environment} from "../environments/environment";
+import {HttpClientModule} from "@angular/common/http";
+import { PostDetailComponent } from './components/post-detail/post-detail.component';
+import {PostComponent} from "./pages/post/post.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
+    HomeComponent,
+    PostComponent,
     FooterComponent,
     HomeComponent,
-    PostComponent
+    PostDetailComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    { provide: 'endpoint', useValue: environment.endpoint },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
