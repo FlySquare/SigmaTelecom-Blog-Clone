@@ -14,9 +14,20 @@ export class Api{
     }
 
     public static getPost(req: Request, res: Response): any {
-        request.get(process.env.POST_URL + req.params.shortCode, function(err, response, body) {
-            res.send(body);
+        request.get(process.env.POST_URL + req.params.shortCode, (err, response, body) => {
+            const jsonPosts = this.parsePost(body);
+            res.send(jsonPosts);
         });
+    }
+
+    private static parsePost(body: string): any {
+        const $ = cheerio.load(body);
+        const post: Post = new Post();
+        post.sharedAt = $('[data-hook="time-ago"]').attr().title;
+        post.timeToRead = $('[data-hook="time-to-read"]').attr().title;
+        post.title = $('[data-hook="post-title"]').children(0).children(0).children(0).text();
+        post.description = $('[data-hook="post-description"]').children(0).children(0).html();
+        return post.prepare(post);
     }
 
     private static parsePosts(body: string): any {
