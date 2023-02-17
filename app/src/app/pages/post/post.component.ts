@@ -10,9 +10,13 @@ import {ActivatedRoute, Router} from "@angular/router";
 })
 export class PostComponent implements OnInit {
   post: Post;
-  constructor(private globalService: GlobalService,private route: ActivatedRoute) { }
-
+  constructor(
+    private globalService: GlobalService,
+    private route: ActivatedRoute
+  ) { }
+  href: string;
   ngOnInit() {
+    this.href = new URL(window.location.href).href;
     this.route.params.subscribe((params: any) => {
       this.globalService.getPost(params.slug).subscribe((post: Post) => {
         this.post = post;

@@ -23,6 +23,7 @@ export class Api{
     private static parsePost(body: string): any {
         const $ = cheerio.load(body);
         const post: Post = new Post();
+        let images: {low?: string, high?: string}[] = [];
         if($('[data-hook="empty-states__title"]').length > 0) {
             return {
                 error: true,
@@ -32,7 +33,16 @@ export class Api{
         post.sharedAt = $('[data-hook="time-ago"]').attr().title;
         post.timeToRead = $('[data-hook="time-to-read"]').attr().title;
         post.title = $('[data-hook="post-title"]').children(0).children(0).children(0).text();
+        $('[data-animate-blur]').each(function(key: any,value: any) {
+            images.push({
+                high : value.children[0].attribs.src.split('/v1')[0],
+            });
+        });
         post.description = $('[data-hook="post-description"]').children(0).children(0).html();
+        post.description = post.description.replace(/<img[^>]*>/g, '');
+
+        console.log();
+        post.images = images;
         return {data:post.prepare(post)};
     }
 
@@ -41,7 +51,7 @@ export class Api{
         const posts: Post[] = [];
         $('[data-hook="gallery-item-image-img"]').each(function(key: any,value: any) {
             posts.push(new Post().prepare({
-                images: {
+                image: {
                     low : value.attribs.src,
                     high: value.attribs.src.split('/v1')[0]
                 }

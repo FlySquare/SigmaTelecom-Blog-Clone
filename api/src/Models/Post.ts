@@ -1,5 +1,6 @@
 export class Post{
-    images?: {low: string, high: string};
+    images?: {low?: string, high?: string}[];
+    image?: {low: string, high: string};
     sharedAt: string;
     timeToRead: string;
     title:string;

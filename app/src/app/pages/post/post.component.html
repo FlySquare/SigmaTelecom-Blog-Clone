@@ -1,1 +1,31 @@
-<p>post works!</p>
+<div class="content">
+  <div class="info">
+    <div class="author">
+      <img src="assets/images/profile.jpg" alt="author-image">
+      <p>Sigma Group</p>
+    </div>
+    <i class="fa fa-circle" aria-hidden="true"></i>
+    <div class="dateRead">
+      <p>{{post?.sharedAt}}</p>
+      <i class="fa fa-circle" aria-hidden="true"></i>
+      <p>{{post?.timeToRead}}</p>
+    </div>
+  </div>
+  <h1>{{post?.title}}</h1>
+  <img class="postImage " *ngFor="let image of post?.images" [src]="image.high" alt="blog-image">
+  <div class="content" [innerHTML]="post?.description"></div>
+  <hr>
+  <div class="share">
+    <div class="shareText">
+      <p>Share this post</p>
+    </div>
+    <div class="shareIcons">
+      <a target="_blank" href="http://www.facebook.com/sharer/sharer.php?u={{ href }}"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+      <a target="_blank" href="https://twitter.com/intent/tweet?url={{ href }}"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+      <a target="_blank" href="https://www.linkedin.com/shareArticle?mini=true&url={{ href }}"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+    </div>
+  </div>
+  <div *ngIf="post === undefined" class="loader">
+    <img src="assets/images/loading-gif.gif" alt="loader">
+  </div>
+</div>

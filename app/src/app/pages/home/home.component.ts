@@ -45,7 +45,6 @@ export class HomeComponent implements OnInit{
   ngOnInit() {
     this.globalService.getPosts(this.page).subscribe((data: any) => {
       this.posts = data;
-      console.log(this.posts);
     });
   }
 
