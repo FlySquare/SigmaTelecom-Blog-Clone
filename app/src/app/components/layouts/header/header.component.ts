@@ -8,6 +8,7 @@ import { Component } from '@angular/core';
 export class HeaderComponent {
   overflow = false;
 
+
   giveOverflow(){
     this.overflow = !this.overflow;
     if (this.overflow) {

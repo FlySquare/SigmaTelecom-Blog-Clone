@@ -10,6 +10,7 @@ import {environment} from "../environments/environment";
 import {HttpClientModule} from "@angular/common/http";
 import { PostDetailComponent } from './components/post-detail/post-detail.component';
 import {PostComponent} from "./pages/post/post.component";
+import {InfiniteScrollModule} from "ngx-infinite-scroll";
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import {PostComponent} from "./pages/post/post.component";
   ],
   imports: [
     BrowserModule,
+    InfiniteScrollModule,
     AppRoutingModule,
     HttpClientModule
   ],

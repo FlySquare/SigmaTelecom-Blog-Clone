@@ -15,6 +15,7 @@ app.get('/', (req: Request, res: Response) => {
 });
 
 app.get('/api/posts/page/:id', (req: Request, res: Response) => {
+    console.log(req.params.id)
     Api.getPosts(req, res);
 });
 
